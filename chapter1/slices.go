@@ -11,4 +11,6 @@ func main() {
 	fmt.Println(len(mySlice), ":", cap(mySlice))
 
 	mySlice = mySlice[1:] // Delete first element from the Slice
+
+	mySlice = append(mySlice[:1], mySlice[2:]...)
 }
