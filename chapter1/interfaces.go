@@ -29,14 +29,16 @@ func (t *Train) CheckRailsWidth() int {
 }
 
 func main() {
+	// Railsroad object
 	railroad := Railroad{Width: 10}
 
+	// Train objects
 	passengerTrain := Train{TrainWidth: 10}
 	cargoTrain := Train{TrainWidth: 15}
 
 	canPassengerTrainPass := railroad.IsCorrectSizeTrain(&passengerTrain)
 	canCargoTrainPass := railroad.IsCorrectSizeTrain(&cargoTrain)
 
-	fmt.Printf("Can passenger train pass? %b\n", canPassengerTrainPass)
-	fmt.Printf("Can cargo train pass? %b\n", canCargoTrainPass)
+	fmt.Println("Can passenger train pass?", canPassengerTrainPass)
+	fmt.Println("Can cargo train pass?", canCargoTrainPass)
 }
