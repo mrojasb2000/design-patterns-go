@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-type MyObject struct {
+type myObject struct {
 	Number int    `json:"number"`
 	Word   string `json:"string"`
 }
