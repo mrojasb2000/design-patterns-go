@@ -20,6 +20,7 @@ func Swim() {
 	fmt.Println("Swimming!")
 }
 
+//--------------------------------------------------------------------------
 // Form: Embed composite
 type Animal struct{}
 
@@ -33,6 +34,7 @@ type Shark struct {
 	Swim func()
 }
 
+//--------------------------------------------------------------------------
 // Form: Interfaces
 type Swimmer interface {
 	Swim()
@@ -53,42 +55,26 @@ type CompositeSwimmerB struct {
 	Swimmer
 }
 
-func main() {
-	/*
-		swimmer := CompositeSwimmerA{
-			MySwim: Swim,
-		}
+//--------------------------------------------------------------------------
+// Form: Binary Tree
+type Tree struct {
+	LeafValue int
+	Right     *Tree
+	Left      *Tree
+}
 
-		// Zero initilization struct
-		swimmer.MyAthlete.Train()
-		swimmer.MySwim()
-	*/
+//--------------------------------------------------------------------------
+// Form: Son
+type Parent struct {
+	SomeField int
+}
 
-	/*
-		// A pointer to function
-		localSwim := Swim
+type Son struct {
+	//Parent    // Embed version - error
+	P Parent // Without embed version - ok
+}
 
-		swimmer := CompositeSwimmerA{
-			MySwim: localSwim,
-		}
-
-		swimmer.MyAthlete.Train()
-		swimmer.MySwim()
-
-		// Embed objects
-		fish := Shark{
-			Swim: Swim,
-		}
-
-		fish.Eat()
-		fish.Swim()
-	*/
-
-	swimmer := CompositeSwimmerB{
-		&Athlete{},
-		&SwimmerImpl{},
-	}
-
-	swimmer.Train()
-	swimmer.Swim()
+func GetParentField(p *Parent) int {
+	fmt.Println(p.SomeField)
+	return 0
 }
