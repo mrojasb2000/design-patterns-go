@@ -54,5 +54,6 @@ type PacktPrinter struct {
 }
 
 func (c *PacktPrinter) Print() error {
-	return errors.New("Not implemented yet")
+	c.Printer.PrintMessage(fmt.Sprintf("Message from Packt: %s", c.Msg))
+	return nil
 }
