@@ -1,6 +1,7 @@
 package flyweight
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -42,4 +43,9 @@ func Test_HighVolume(t *testing.T) {
 	if factory.GetNumberOfObjects() != 2 {
 		t.Errorf("The number of objects created was not 2: %d\n", factory.GetNumberOfObjects())
 	}
+
+	for i := 0; i < 3; i++ {
+		fmt.Printf("Pointer %d points to %p and is located in %p\n", i, teams[i], &teams[i])
+	}
+
 }
