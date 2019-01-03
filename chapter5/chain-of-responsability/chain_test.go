@@ -46,7 +46,7 @@ func TestCreateDefaultChain(t *testing.T) {
 	})
 
 	// Closure
-	t.Run("", func(t *testing.T) {
+	t.Run("2 loggers, second uses the closure implementation", func(t *testing.T) {
 		myWriter = myTestWriter{}
 
 		closureLogger := ClosureChain{
