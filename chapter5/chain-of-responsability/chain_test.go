@@ -1,6 +1,7 @@
 package chain_of_responsability
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -41,6 +42,26 @@ func TestCreateDefaultChain(t *testing.T) {
 
 		if myWriter.receivedMessage == nil || !strings.Contains(*myWriter.receivedMessage, "Hello") {
 			t.Fatal("Last link didn't received expected message")
+		}
+	})
+
+	// Closure
+	t.Run("", func(t *testing.T) {
+		myWriter = myTestWriter{}
+
+		closureLogger := ClosureChain{
+			Closure: func(s string) {
+				fmt.Printf("My closure logger! Message: %s\n", s)
+				myWriter.receivedMessage = &s
+			},
+		}
+
+		writerLogger.NextChain = &closureLogger
+
+		chain.Next("Hello closure logger")
+
+		if *myWriter.receivedMessage != "Hello closure logger" {
+			t.Fatal("Expected message wasn't received in myWriter")
 		}
 	})
 }
