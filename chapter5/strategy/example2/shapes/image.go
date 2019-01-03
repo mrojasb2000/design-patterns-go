@@ -10,6 +10,7 @@ import (
 )
 
 type ImageSquare struct {
+	// Struct embedded
 	strategy.DrawOutput
 }
 

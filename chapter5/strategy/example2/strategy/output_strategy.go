@@ -13,6 +13,7 @@ type Output interface {
 }
 
 type DrawOutput struct {
+	// Place where it is going to write
 	Writer    io.Writer
 	LogWriter io.Writer
 }

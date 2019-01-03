@@ -5,6 +5,7 @@ import (
 )
 
 type TextSquare struct {
+	// Struct embedded
 	strategy.DrawOutput
 }
 
