@@ -10,12 +10,21 @@ type Command interface {
 	Info() string
 }
 
+// Command handler
 type TimePassed struct {
 	start time.Time
 }
 
 func (t *TimePassed) Info() string {
 	return time.Since(t.start).String()
+}
+
+type CustomMessage struct {
+	message string
+}
+
+func (c *CustomMessage) Info() string {
+	return c.message
 }
 
 // Chain of responsability patterns
@@ -43,7 +52,8 @@ func main() {
 	second := Logger{NextChain: &third}
 	first := Logger{NextChain: &second}
 
-	command := &TimePassed{start: time.Now()}
-
+	command1 := &TimePassed{start: time.Now()}
+	first.Next(command1)
+	command := &CustomMessage{message: "Hello"}
 	first.Next(command)
 }
