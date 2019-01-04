@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// Command patterns
 type Command interface {
 	Info() string
 }
@@ -17,6 +18,7 @@ func (t *TimePassed) Info() string {
 	return time.Since(t.start).String()
 }
 
+// Chain of responsability patterns
 type ChainLogger interface {
 	Next(Command)
 }
