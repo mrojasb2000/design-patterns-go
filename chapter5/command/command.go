@@ -1,4 +1,4 @@
-package command
+package main
 
 type Command interface {
 	Execute()
@@ -19,6 +19,21 @@ func CreateCommand(s string) Command {
 	}
 }
 
+type CommandQueue struct {
+	queue []Command
+}
+
+func (p *CommandQueue) AddCommand(c Command){
+	p.queue = append(p.queue, c)
+	
+	if len(p.queue) == 3 {
+		for _, command range p.queue {
+			command.Execute()
+		}
+		p.queue = make([]Command, 3)
+	}
+}
+
 func main() {
-	println("Hello World!")
+	
 }
