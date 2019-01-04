@@ -21,3 +21,16 @@ type HelloMessage struct{}
 func (h *HelloMessage) Info() string {
 	return "Hello World!"
 }
+
+func main() {
+	var timeCommand Command
+	timeCommand = &TimePassed{time.Now()}
+
+	var helloCommand Command
+	helloCommand = &HelloMessage{}
+
+	time.Sleep(time.Second)
+
+	fmt.Println(timeCommand.Info())
+	fmt.Println(helloCommand.Info())
+}
