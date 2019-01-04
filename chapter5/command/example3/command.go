@@ -10,7 +10,6 @@ type Command interface {
 	Info() string
 }
 
-// Command handler
 type TimePassed struct {
 	start time.Time
 }
@@ -36,6 +35,7 @@ type Logger struct {
 	NextChain ChainLogger
 }
 
+// Command handler
 func (l *Logger) Next(c Command) {
 	time.Sleep(time.Second)
 
@@ -52,8 +52,8 @@ func main() {
 	second := Logger{NextChain: &third}
 	first := Logger{NextChain: &second}
 
-	command1 := &TimePassed{start: time.Now()}
-	first.Next(command1)
-	command := &CustomMessage{message: "Hello"}
-	first.Next(command)
+	timeCommand := &TimePassed{start: time.Now()}
+	first.Next(timeCommand)
+	messageCommand := &CustomMessage{message: "Hello"}
+	first.Next(messageCommand)
 }
