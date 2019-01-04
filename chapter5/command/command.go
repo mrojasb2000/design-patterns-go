@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 type Command interface {
 	Execute()
 }
@@ -23,11 +27,11 @@ type CommandQueue struct {
 	queue []Command
 }
 
-func (p *CommandQueue) AddCommand(c Command){
+func (p *CommandQueue) AddCommand(c Command) {
 	p.queue = append(p.queue, c)
-	
+
 	if len(p.queue) == 3 {
-		for _, command range p.queue {
+		for _, command := range p.queue {
 			command.Execute()
 		}
 		p.queue = make([]Command, 3)
@@ -35,5 +39,12 @@ func (p *CommandQueue) AddCommand(c Command){
 }
 
 func main() {
-	
+	queue := CommandQueue{}
+
+	queue.AddCommand(CreateCommand("First message"))
+	queue.AddCommand(CreateCommand("Second message"))
+	queue.AddCommand(CreateCommand("Third message"))
+
+	queue.AddCommand(CreateCommand("Four message"))
+	queue.AddCommand(CreateCommand("Fifth message"))
 }
