@@ -38,8 +38,10 @@ func (l *Logger) Next(c Command) {
 }
 
 func main() {
-	second := new(Logger)
-	first := Logger{NextChain: second}
+	last := new(Logger)
+	third := Logger{NextChain: last}
+	second := Logger{NextChain: &third}
+	first := Logger{NextChain: &second}
 
 	command := &TimePassed{start: time.Now()}
 
