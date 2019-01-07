@@ -27,6 +27,7 @@ type CommandQueue struct {
 	queue []Command
 }
 
+// Command handler -> execute content of command
 func (p *CommandQueue) AddCommand(c Command) {
 	p.queue = append(p.queue, c)
 
