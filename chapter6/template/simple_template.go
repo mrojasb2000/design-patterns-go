@@ -27,3 +27,17 @@ func (t *Template) third() string {
 func (t *Template) ExecuteAlgorithm(m MessageRetriever) string {
 	return strings.Join([]string{t.first(), m.Message(), t.third()}, " ")
 }
+
+type AnonymousTemplate struct{}
+
+func (a *AnonymousTemplate) first() string {
+	return "hello"
+}
+
+func (a *AnonymousTemplate) third() string {
+	return "template"
+}
+
+func (a *AnonymousTemplate) ExecuteAlgorithm(f func() string) string {
+	return strings.Join([]string{a.first(), f(), a.third()}, " ")
+}

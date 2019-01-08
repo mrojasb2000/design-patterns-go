@@ -25,4 +25,18 @@ func TestTemplate_ExecuteAlgorithm(t *testing.T) {
 			t.Errorf("Expected string '%s' wasn't found on returned string\n", expected)
 		}
 	})
+
+	t.Run("Using anonymous functions", func(t *testing.T) {
+		m := new(AnonymousTemplate)
+		res := m.ExecuteAlgorithm(func() string {
+			return "world"
+		})
+		expectedOrError(res, " world ", t)
+	})
+}
+
+func expectedOrError(res string, expected string, t *testing.T) {
+	if !strings.Contains(res, expected) {
+		t.Errorf("Expected string '%s' wasn't found on returned string\n", expected)
+	}
 }
