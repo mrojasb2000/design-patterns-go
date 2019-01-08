@@ -41,3 +41,19 @@ func (a *AnonymousTemplate) third() string {
 func (a *AnonymousTemplate) ExecuteAlgorithm(f func() string) string {
 	return strings.Join([]string{a.first(), f(), a.third()}, " ")
 }
+
+// Patterns Adapter
+type adapter struct {
+	myFunc func() string
+}
+
+func (a *adapter) Message() string {
+	if a.myFunc != nil {
+		return a.myFunc()
+	}
+	return ""
+}
+
+func MessageRetrieverAdapter(f func() string) MessageRetriever {
+	return &adapter{myFunc: f}
+}
