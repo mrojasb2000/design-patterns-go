@@ -1,6 +1,7 @@
 package visitor
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -16,6 +17,7 @@ func (t *TestHelper) Write(p []byte) (int, error) {
 
 func Test_Overall(t *testing.T) {
 	testHelper := &TestHelper{}
+	newVisitor := &MsgFieldVisitorPrinter{}
 	visitor := &MessageVisitor{}
 
 	t.Run("MessageA test", func(t *testing.T) {
@@ -44,6 +46,21 @@ func Test_Overall(t *testing.T) {
 
 		expected := "B: Hello World (Visited B)"
 		if testHelper.Received != expected {
+			t.Errorf("Expected result was incorrect. %s != %s", testHelper.Received, expected)
+		}
+	})
+
+	t.Run("MsgFieldVisitorPrinter test", func(t *testing.T) {
+		msg := MessageA{
+			Msg:    "Hello World",
+			Output: testHelper,
+		}
+
+		msg.Accept(newVisitor)
+		msg.Print()
+
+		expected := "Hello World"
+		if !strings.Contains(testHelper.Received, expected) {
 			t.Errorf("Expected result was incorrect. %s != %s", testHelper.Received, expected)
 		}
 	})

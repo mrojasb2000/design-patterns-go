@@ -53,6 +53,16 @@ func (mf *MessageVisitor) VisitB(m *MessageB) {
 	m.Msg = fmt.Sprintf("%s %s", m.Msg, "(Visited B)")
 }
 
+type MsgFieldVisitorPrinter struct{}
+
+func (mf *MsgFieldVisitorPrinter) VisitA(m *MessageA) {
+	fmt.Printf("%s\n", m.Msg)
+}
+
+func (mf *MsgFieldVisitorPrinter) VisitB(m *MessageB) {
+	fmt.Printf("%s\n", m.Msg)
+}
+
 type Visitable interface {
 	Accept(Visitor)
 }
