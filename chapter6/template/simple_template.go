@@ -47,6 +47,7 @@ type adapter struct {
 	myFunc func() string
 }
 
+// Implicity implementing the MessageRetriever interface
 func (a *adapter) Message() string {
 	if a.myFunc != nil {
 		return a.myFunc()
