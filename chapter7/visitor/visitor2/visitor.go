@@ -45,6 +45,21 @@ type Pasta struct {
 	Product
 }
 
+// A type that embeds a second type cannot be considered of that latter type
+type Frige struct {
+	Product
+}
+
+// Override method
+func (f *Frige) GetPrice() float32 {
+	return f.Product.Price + 20
+}
+
+// The solution is to also implement the accept method so that it can be considered as a Visitable
+func (f *Frige) Accept(v Visitor) {
+	v.Visit(f)
+}
+
 type PriceVisitor struct {
 	Sum float32
 }
@@ -62,7 +77,7 @@ func (n *NamePrinter) Visit(p ProductInfoRetriever) {
 }
 
 func main() {
-	products := make([]Visitable, 2)
+	products := make([]Visitable, 3)
 
 	products[0] = &Rice{
 		Product: Product{
@@ -78,6 +93,13 @@ func main() {
 		},
 	}
 
+	products[2] = &Frige{
+		Product: Product{
+			Price: 50.0,
+			Name:  "A fridge",
+		},
+	}
+
 	// Print the sum of prices
 	priceVisitor := &PriceVisitor{}
 
@@ -86,5 +108,14 @@ func main() {
 	}
 
 	fmt.Printf("Total: %f\n", priceVisitor.Sum)
+
+	//Print the products list
+	nameVisitor := &NamePrinter{}
+
+	for _, p := range products {
+		p.Accept(nameVisitor)
+	}
+
+	fmt.Printf("\nProduct list:\n-------------\n%s", nameVisitor.ProductList)
 
 }
