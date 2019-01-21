@@ -59,7 +59,7 @@ func (f *FinishState) executeState(c *GameContext) bool {
 	if c.Won {
 		println("Congrants, you won")
 	} else {
-		println("You lose")
+		fmt.Printf("You lose. The correct number was: %d\n", c.SecretNumber)
 	}
 	return false
 }
