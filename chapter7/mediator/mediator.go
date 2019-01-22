@@ -43,11 +43,13 @@ func (o *One) OnePlus(n interface{}) interface{} {
 func Sum(a, b interface{}) interface{} {
 	switch a := a.(type) {
 	case One:
-		switch b.(type) {
+		switch b := b.(type) {
 		case One:
 			return &Two{}
 		case Two:
 			return &Three{}
+		case int:
+			return b + 1
 		default:
 			return fmt.Errorf("Number not found")
 		}
@@ -79,4 +81,5 @@ func Sum(a, b interface{}) interface{} {
 func main() {
 	fmt.Printf("%#v\n", Sum(One{}, Two{}))
 	fmt.Printf("%d\n", Sum(1, 2))
+	fmt.Printf("%d\n", Sum(One{}, 5))
 }
