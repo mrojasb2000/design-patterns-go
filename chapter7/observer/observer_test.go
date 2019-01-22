@@ -17,7 +17,17 @@ func (s *Publisher) AddObserver(o Observer) {
 	s.ObserversList = append(s.ObserversList, o)
 }
 
-func (s *Publisher) RemoveObserver(o Observer) {}
+func (s *Publisher) RemoveObserver(o Observer) {
+	var indexToRemove int
+
+	for i, observer := range s.ObserversList {
+		if observer == o {
+			indexToRemove = i
+			break
+		}
+	}
+	s.ObserversList = append(s.ObserversList[:indexToRemove], s.ObserversList[indexToRemove+1:]...)
+}
 
 func (s *Publisher) NotifyObservers(m string) {}
 
