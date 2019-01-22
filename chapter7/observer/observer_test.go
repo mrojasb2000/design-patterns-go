@@ -13,7 +13,9 @@ type Publisher struct {
 	ObserversList []Observer
 }
 
-func (s *Publisher) AddObserver(o Observer) {}
+func (s *Publisher) AddObserver(o Observer) {
+	s.ObserversList = append(s.ObserversList, o)
+}
 
 func (s *Publisher) RemoveObserver(o Observer) {}
 
