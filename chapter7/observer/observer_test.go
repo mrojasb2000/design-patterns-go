@@ -29,7 +29,12 @@ func (s *Publisher) RemoveObserver(o Observer) {
 	s.ObserversList = append(s.ObserversList[:indexToRemove], s.ObserversList[indexToRemove+1:]...)
 }
 
-func (s *Publisher) NotifyObservers(m string) {}
+func (s *Publisher) NotifyObservers(m string) {
+	fmt.Printf("Publisher received message %s to notify observers\n", m)
+	for _, observer := range s.ObserversList {
+		observer.Notify(m)
+	}
+}
 
 // Mock structure that implement the Observer interface
 
