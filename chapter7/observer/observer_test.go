@@ -83,6 +83,10 @@ func TestSubject(t *testing.T) {
 
 		}
 
+		if len(publisher.ObserversList) == 0 {
+			t.Errorf("The list is empty. Nothing to test\n")
+		}
+
 		message := "Hello World!"
 		publisher.NotifyObservers(message)
 
