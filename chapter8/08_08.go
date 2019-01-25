@@ -9,6 +9,7 @@ func main() {
 	toUpperSync("Hello Callbacks!", func(v string) {
 		fmt.Printf("Callback: %s\n", v)
 	})
+	println("Waiting sync response...")
 }
 
 func toUpperSync(word string, f func(string)) {
