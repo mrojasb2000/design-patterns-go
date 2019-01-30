@@ -8,6 +8,7 @@ func main() {
 	helloCh := make(chan string, 1)
 	goodbyeCh := make(chan string, 1)
 	quitCh := make(chan bool)
+
 	go receiver(helloCh, goodbyeCh, quitCh)
 
 	go sendString(helloCh, "hello!")
